@@ -1,8 +1,38 @@
-import React from "react";
-import { View } from "react-native";
+import React, { useState } from 'react';
+import { useEffect } from 'react';
+import {
+	ActivityIndicator,
+	FlatList,
+	RefreshControl,
+	StyleSheet,
+} from 'react-native';
+import PostCard from '../components/PostCard';
+import { getPosts } from '../lib/posts';
 
 function FeedScreen() {
-	return <View />
+	const [posts, setPosts] = useState(null);
+
+	useEffect(() => {
+		getPosts().then(setPosts);
+	}, []);
+
+	return (
+		<FlatList
+			data={posts}
+			renderItem={renderItem}
+			keyExtractor={(item) => item.id}
+		/>
+	);
 }
+
+const renderItem = ({ item }) => (
+	<PostCard
+		createdAt={item.createdAt}
+		description={item.description}
+		id={item.id}
+		user={item.user}
+		photoURL={item.photoURL}
+	/>
+);
 
 export default FeedScreen;

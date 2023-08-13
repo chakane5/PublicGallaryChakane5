@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
 	StyleSheet,
 	TextInput,
-	View,
 	Animated,
 	Keyboard,
 	useWindowDimensions,
